@@ -33,7 +33,7 @@ namespace DeployR
             RenderHtmlFromView();
             CreateHtmlDocumentFromHtml();
 
-            StaticFileExporter fileExporter = new StaticFileExporter(_htmlDocument, _renderedHtml);
+            StaticFileExporter fileExporter = new StaticFileExporter(_htmlDocument);
             fileExporter.ExportFiles(settings);
         }
 
