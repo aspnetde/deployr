@@ -7,6 +7,7 @@ namespace DeployR.Web
         public static string DownloadString(string requestUri)
         {
             WebClient webClient = new WebClient();
+            webClient.Headers.Add("user-agent", "69° DeployR");
             return webClient.DownloadString(requestUri);
         }
     }

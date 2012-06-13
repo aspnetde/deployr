@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.IO;
+using DeployR.AgilityPackExtensions;
 using DeployR.AgilityPackExtensions.NodeSelection;
 using DeployR.FileGeneration;
 using DeployR.Web;
@@ -10,13 +11,11 @@ namespace DeployR.Exporting
     internal class StaticFileExporter
     {
         private readonly HtmlDocument _htmlDocument;
-        private readonly string _renderedHtml;
         private ExportSettings _settings;
 
-        public StaticFileExporter(HtmlDocument htmlDocument, string renderedHtml)
+        public StaticFileExporter(HtmlDocument htmlDocument)
         {
             _htmlDocument = htmlDocument;
-            _renderedHtml = renderedHtml;
         }
 
         public void ExportFiles(ExportSettings settings)
@@ -59,7 +58,11 @@ namespace DeployR.Exporting
 
         private void ExportCssFiles()
         {
+            
             HtmlNodeCollection stylesheetNodes = StylesheetNodeSelector.SelectStylesheetNodes(_htmlDocument);
+
+            if (stylesheetNodes == null)
+                return;
 
             for (int i = 0; i < stylesheetNodes.Count; i++)
             {
@@ -81,11 +84,16 @@ namespace DeployR.Exporting
                 newNode.Attributes["href"].Value = fileName;
                 node.ParentNode.ReplaceChild(newNode, node);
             }
+
         }
 
         private void ExportJavaScriptFiles()
         {
+
             HtmlNodeCollection javaScriptNodes = JavaScriptNodeSelector.SelectJavaScriptNodes(_htmlDocument);
+
+            if (javaScriptNodes == null)
+                return;
 
             for (int i = 0; i < javaScriptNodes.Count; i++)
             {
@@ -110,6 +118,7 @@ namespace DeployR.Exporting
                 newNode.Attributes["src"].Value = fileName;
                 node.ParentNode.ReplaceChild(newNode, node);
             }
+
         }
     }
 }
