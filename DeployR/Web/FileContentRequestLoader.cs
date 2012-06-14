@@ -2,7 +2,7 @@
 
 namespace DeployR.Web
 {
-    internal class FileContentRequestLoader
+    internal static class FileContentRequestLoader
     {
         public static string DownloadString(string requestUri)
         {
