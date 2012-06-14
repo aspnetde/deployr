@@ -44,12 +44,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AgilityPackExtensions\HtmlDocumentExtensions.cs" />
+    <Compile Include="AgilityPackExtensions\NodeSelection\ImageNodeSelector.cs" />
     <Compile Include="AgilityPackExtensions\NodeSelection\JavaScriptNodeSelector.cs" />
     <Compile Include="AgilityPackExtensions\NodeSelection\StylesheetNodeSelector.cs" />
     <Compile Include="Web\RequestUriGenerator.cs" />
     <Compile Include="Exporting\StaticFileExporter.cs" />
     <Compile Include="Exporting\ViewStringExporter.cs" />
-    <Compile Include="Exporting\FileNameSettings.cs" />
     <Compile Include="FileGeneration\FileWriter.cs" />
     <Compile Include="PhoneGapFileExporter.cs" />
     <Compile Include="Exporting\ExportSettings.cs" />

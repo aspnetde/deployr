@@ -5,8 +5,11 @@ namespace DeployR.Exporting
 {
     public class ExportSettings
     {
-        public FileNameSettings Android { get; set; }
-        public FileNameSettings iOS { get; set; }
+        public string TargetDirectory { get; set; }
+        public string HtmlFileName { get; set; }
+        public string StylesheetFileNamePattern { get; set; }
+        public string JavaScriptFileNamePattern { get; set; }
+        public string ImageFileNamePattern { get; set; }
 
         public ExportSettings()
         {
@@ -15,14 +18,13 @@ namespace DeployR.Exporting
 
         private void SetDefaultValues()
         {
+            HtmlFileName = "index.html";
+            StylesheetFileNamePattern = "stylesheet-{0}.css";
+            JavaScriptFileNamePattern = "script-{0}.js";
+            ImageFileNamePattern = "image-{0}.{1}";
+
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-            string exportDirectory = Path.Combine(desktopPath, "Exporte für PhoneGap");
-
-            string androidTargetDirectory = Path.Combine(exportDirectory, "Android");
-            string iOSTargetDirectory = Path.Combine(exportDirectory, "iOS");
-
-            Android = new FileNameSettings { TargetDirectory = androidTargetDirectory };
-            iOS = new FileNameSettings { TargetDirectory = iOSTargetDirectory };
+            TargetDirectory = Path.Combine(desktopPath, "export");
         }
     }
 }
