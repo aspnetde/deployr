@@ -151,20 +151,23 @@ namespace DeployR.Exporting
             foreach (HtmlNode node in imageNodes)
             {
                 string src = node.Attributes["src"].Value;
-                
+                string newFileName;
+
                 if (_copiedImagePaths.Keys.Contains(src))
                 {
-                    continue;
+                    newFileName = _copiedImagePaths[src];
                 }
-                
-                string imageUri = Path.Combine(_settings.TargetDirectory, src);
-                string imageSourcePath = HttpContext.Current.Server.MapPath(imageUri);
-                string extension = Path.GetExtension(imageSourcePath).TrimStart('.');
-                string newFileName = string.Format(_settings.ImageFileNamePattern, _copiedImagePaths.Count + 1, extension);
-                string imageDestinationPath = Path.Combine(_settings.TargetDirectory, newFileName);
+                else
+                {
+                    string imageUri = Path.Combine(_settings.TargetDirectory, src);
+                    string imageSourcePath = HttpContext.Current.Server.MapPath(imageUri);
+                    string extension = Path.GetExtension(imageSourcePath).TrimStart('.');
+                    newFileName = string.Format(_settings.ImageFileNamePattern, _copiedImagePaths.Count + 1, extension);
+                    string imageDestinationPath = Path.Combine(_settings.TargetDirectory, newFileName);
 
-                _copiedImagePaths.Add(src, newFileName);
-                File.Copy(imageSourcePath, imageDestinationPath, overwrite: true);
+                    _copiedImagePaths.Add(src, newFileName);
+                    File.Copy(imageSourcePath, imageDestinationPath, overwrite: true);
+                }
 
                 HtmlNode newNode = _htmlDocument.CreateElement("img");
                 newNode.CopyFrom(node);
