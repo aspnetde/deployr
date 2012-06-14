@@ -44,7 +44,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AgilityPackExtensions\HtmlDocumentExtensions.cs" />
-    <Compile Include="AgilityPackExtensions\HtmlNodeExtensions.cs" />
     <Compile Include="AgilityPackExtensions\NodeSelection\JavaScriptNodeSelector.cs" />
     <Compile Include="AgilityPackExtensions\NodeSelection\StylesheetNodeSelector.cs" />
     <Compile Include="Web\RequestUriGenerator.cs" />
