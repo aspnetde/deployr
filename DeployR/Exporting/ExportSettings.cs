@@ -19,9 +19,9 @@ namespace DeployR.Exporting
         private void SetDefaultValues()
         {
             HtmlFileName = "index.html";
-            StylesheetFileNamePattern = "stylesheet-{0}.css";
-            JavaScriptFileNamePattern = "script-{0}.js";
-            ImageFileNamePattern = "image-{0}.{1}";
+            StylesheetFileNamePattern = "stylesheet-{0}-{1}.css";
+            JavaScriptFileNamePattern = "script-{0}-{1}.js";
+            ImageFileNamePattern = "image-{0}-{1}.{2}";
 
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
             TargetDirectory = Path.Combine(desktopPath, "export");
