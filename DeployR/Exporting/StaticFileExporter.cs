@@ -70,7 +70,7 @@ namespace DeployR.Exporting
                 string href = node.Attributes["href"].Value;
                 string requestUri = RequestUriGenerator.GenerateUri(href);
                 string cssRules = FileContentRequestLoader.DownloadString(requestUri);
-                string fileName = string.Format(_settings.StylesheetFileNamePattern, i + 1);
+                string fileName = string.Format(_settings.StylesheetFileNamePattern, i + 1, Path.GetFileNameWithoutExtension(href));
                 string stylesheetfilePath = Path.Combine(_settings.TargetDirectory, fileName);
 
                 cssRules = ReplaceCssImageReferences(cssRules);
@@ -101,7 +101,7 @@ namespace DeployR.Exporting
             }
 
             string fileExtension = match.Groups["extension"].Value;
-            string newFileName = string.Format(_settings.ImageFileNamePattern, _copiedImagePaths.Count + 1, fileExtension);
+            string newFileName = string.Format(_settings.ImageFileNamePattern, _copiedImagePaths.Count + 1, Path.GetFileNameWithoutExtension(filePath), fileExtension);
             string imageSourcePath = HttpContext.Current.Server.MapPath(filePath);
             string imageDestinationPath = Path.Combine(_settings.TargetDirectory, newFileName);
 
@@ -127,7 +127,7 @@ namespace DeployR.Exporting
                 string src = node.Attributes["src"].Value;
                 string requestUri = RequestUriGenerator.GenerateUri(src);
                 string javaScriptFileContent = FileContentRequestLoader.DownloadString(requestUri);
-                string fileName = string.Format(_settings.JavaScriptFileNamePattern, i + 1);
+                string fileName = string.Format(_settings.JavaScriptFileNamePattern, i + 1, Path.GetFileNameWithoutExtension(src));
                 string javaScriptFilePath = Path.Combine(_settings.TargetDirectory, fileName);
 
                 FileWriter.WriteFile(javaScriptFilePath, javaScriptFileContent);
@@ -162,7 +162,7 @@ namespace DeployR.Exporting
                     string imageUri = Path.Combine(_settings.TargetDirectory, src);
                     string imageSourcePath = HttpContext.Current.Server.MapPath(imageUri);
                     string extension = Path.GetExtension(imageSourcePath).TrimStart('.');
-                    newFileName = string.Format(_settings.ImageFileNamePattern, _copiedImagePaths.Count + 1, extension);
+                    newFileName = string.Format(_settings.ImageFileNamePattern, _copiedImagePaths.Count + 1, Path.GetFileNameWithoutExtension(src), extension);
                     string imageDestinationPath = Path.Combine(_settings.TargetDirectory, newFileName);
 
                     _copiedImagePaths.Add(src, newFileName);
