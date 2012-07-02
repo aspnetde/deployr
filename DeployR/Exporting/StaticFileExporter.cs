@@ -150,6 +150,13 @@ namespace DeployR.Exporting
 
             foreach (HtmlNode node in imageNodes)
             {
+
+                // Wenn kein src-Attribut vorhanden, weiter (kommt vor, wenn
+                // z.B. in jQuery-Templates Bild-Tags verwendet werden, deren
+                // Inhalte erst zur Laufzeit bestimmt werden
+                if (node.Attributes["src"] == null)
+                    continue;
+
                 string src = node.Attributes["src"].Value;
                 string newFileName;
 
